@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Hidden from './Hidden';
+import {connect} from 'react-redux';
+import {fetchData} from './Actions';
 
 class App extends Component {
   constructor(props){
@@ -19,12 +21,12 @@ class App extends Component {
     if(this.state.submit){
       return <Hidden show={this.state.NameText} />
     }
-
   }
 
   onSubmit(event){
     console.log(event);
     this.setState({submit:true});
+    this.props.fetchData(this.state.NameText);
   }
   render() {
     return (
@@ -42,4 +44,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(null,{fetchData})(App);
